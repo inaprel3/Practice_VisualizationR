@@ -1,0 +1,61 @@
+install.packages("scatterplot3d")
+X = seq(1, 100, 5)
+Y = seq (1, 100, 5)
+Z = rnorm (length (X), 10, 2)
+data1 <- data.frame (X, Y)
+data2 <- data.frame (X, Y, Z1 = Z - 5)
+data3 <- data.frame (X, Y, Z1 = Z - 3)
+require(scatterplot3d)
+s3d <- scatterplot3d(data1, color = "blue", pch = 19, xlim=NULL, ylim=NULL, zlim= c(0, 20))
+s3d$points3d(data2, col = "red", pch = 18)
+s3d$points3d(data3, col = "green4", pch = 17)
+
+install.packages("Rcmdr", dependencies = TRUE)
+library(Rcmdr)
+data(Indometh)
+names(Indometh)
+attach(Indometh)
+plot(time, conc)
+(means <- tapply(conc, time, mean))
+names(means)
+indo.times <- as.numeric(names(means))
+# будуємо графік типу "точки з лініями":
+plot(indo.times, means, type = "b", xlab = "Час", ylab = "Концентрація")
+plot(indo.times, means, xlab = "Час", ylab = "Концентрація", xlim = c(0, 15))
+plot(indo.times, means, xlab = "Час", ylab = "Концентрація", ylim = c(0, 5))
+plot(indo.times, means, xlab = "Час", ylab = "Концентрація", main = "Швидкість виведення індометацина", type = "o", pch = 2)
+plot(indo.times, means, xlab = "Час", ylab = "Концентрація", main = "Швидкість виведення індометацина", type = "o", pch = 169, font = 5)
+# символи у вигляді ромбів (pch = 5) зеленого кольору (col = 3), заголовок синього кольору (col.main = "blue"), колір назви осей червоного кольору (col.lab = "red")
+plot(indo.times, means, xlab = "Час", ylab = "Концентрація", main = "Швидкість виведення індометацина", type = "o", pch = 5, cex = 1.2, col = 3, col.main = "blue", col.lab = "red")
+plot(indo.times, means, xlab = "Час", ylab = "Концентрація", main = "Швидкість виведення індометацина", type = "o", pch = 21, cex = 1.2, bg = "red", lwd = 2, col.main = "blue")
+plot(indo.times, means, xlab = "Час", ylab = "Концентрація", main = "", type = "l", lwd = 10, lty = 2, col = 6, bty = "L")
+
+X <- rnorm(n = 100, mean = 15, sd = 5)
+hist(X, breaks = 20, freq = FALSE, col = "lightblue")
+plot(density(X, bw = 0.8))
+
+hist(X, breaks = 20, freq = FALSE, col = "lightblue", xlab = "Змінна X", ylab = "Щільність ймовірності", main = "Гістограма, поєднана з кривою густини")
+lines(density(X), col = "red", lwd = 2)
+lines(density(X, bw = 0.8), col = "blue", lwd = 2)
+
+data(InsectSprays)
+head(InsectSprays)
+
+attach(InsectSprays)
+# Порівняння всіх препаратів за кривими ядерної щільності
+install.packages("sm")
+library(sm)
+sm.density.compare(count, spray, lwd = 2, xlab = "Кількість комах")
+title(main = "Криві ядерної щільності")
+# Складаємо вектор з кодами використаних кольорів
+Colfill <- c(2:(2 + length(levels(spray))))
+# додаємо легенду туди, куди ми клікнемо мишею
+legend(locator(1), levels(spray), fill = Colfill)
+
+data(Indometh);
+attach(Indometh)
+install.packages("MASS")
+library(MASS)
+f <- kde2d(time, conc)
+image(f, xlab="Час виведення", ylab="Концентрація індометацина")
+contour(f, add = TRUE)

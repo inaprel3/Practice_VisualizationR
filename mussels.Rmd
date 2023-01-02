@@ -1,0 +1,45 @@
+<!-- R Commander Markdown Template -->
+
+Replace with Main Title
+=======================
+
+### Nastya
+
+### `r as.character(Sys.Date())`
+
+```{r echo=FALSE}
+# include this code chunk as-is to set options
+knitr::opts_chunk$set(comment=NA, prompt=TRUE, out.width=750, fig.height=8, fig.width=8)
+library(Rcmdr)
+library(car)
+library(RcmdrMisc)
+```
+
+```{r}
+mussel <- 
+  read.table("E:/DISCIPLINES_Programs/Technological Practice/Dreissena.txt", 
+  header=TRUE, stringsAsFactors=TRUE, sep="\t", na.strings="NA", dec=".", 
+  strip.white=TRUE)
+```
+
+
+### Correlation Test: Infection, Length
+```{r}
+with(mussel, cor.test(Infection, Length, alternative="two.sided", 
+  method="pearson"))
+```
+
+
+### Scatterplot: Length~Infection
+```{r}
+scatterplot(Length~Infection, regLine=FALSE, smooth=FALSE, boxplots=FALSE, 
+  data=mussel)
+```
+
+
+### Scatterplot: Length~Infection
+```{r}
+scatterplot(Length~Infection, regLine=FALSE, smooth=FALSE, boxplots=FALSE, 
+  data=mussel)
+```
+
